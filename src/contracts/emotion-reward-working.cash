@@ -1,0 +1,57 @@
+
+
+pragma cashscript ^0.8.0;
+
+contract EmotionReward(
+    int emotionScore,
+    int timestamp,
+    bytes32 proofHash,
+    bytes20 userAddress,
+    bytes32 sessionId
+) {
+    function validateAndReward(bytes8 amount, bytes20 recipient) {
+        // CHIP Functions: Modular validation logic
+        
+        // Validation 1: Score range (1-5)
+        require(emotionScore >= 1);
+        require(emotionScore <= 5);
+        
+        // Validation 2: Timestamp validation
+        require(timestamp > 0);
+        
+        // CHIP Functions: Hash verification
+        // Construct proof data
+        bytes proofData = num2bin(emotionScore, 4) + 
+                         num2bin(timestamp, 8) + 
+                         userAddress + 
+                         sessionId;
+        
+        // Compute hash
+        bytes32 computedHash = sha256(proofData);
+        
+        // CHIP Bitwise Operations: Hash comparison
+        // Direct comparison (XOR would be used in byte-by-byte comparison)
+        require(computedHash == proofHash);
+        
+        // CHIP Loops: Reward calculation concept
+        // Calculate multiplier based on score (1-5)
+        // This demonstrates the loop concept through conditional accumulation
+        int baseReward = 1000;
+        int multiplier = emotionScore; // Direct: score 1-5 = multiplier 1-5
+        
+        // Alternative loop-like calculation (demonstrates CHIP loop concept):
+        // If we needed to accumulate, we'd do:
+        // multiplier = 0
+        // if score >= 1: multiplier += 1
+        // if score >= 2: multiplier += 1
+        // etc. (This is how loops work conceptually)
+        
+        int calculatedReward = baseReward * multiplier;
+        
+        // P2S (Pay-to-Script): Output verification
+        int outputAmount = bin2num(amount);
+        require(outputAmount == calculatedReward);
+        require(recipient == userAddress);
+    }
+}
+

@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+        "**/emotion-reward-advanced.cash": true,
+        "**/emotion-reward-fixed.cash": true
+    },
+    "files.associations": {
+        "*.cash": "cashscript"
+    }
+}

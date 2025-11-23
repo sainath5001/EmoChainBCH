@@ -1,0 +1,38 @@
+{
+    "name": "emochain-poe",
+    "version": "1.0.0",
+    "description": "Proof-of-Emotion reward system for Bitcoin Cash Chipnet",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "compile-contract": "cashc src/contracts/emotion-reward.cash --output src/contracts/emotion-reward-artifact.json",
+        "deploy-contract": "./scripts/deploy-contract.sh",
+        "get-contract-address": "node -e \"const artifact = require('./src/contracts/emotion-reward-artifact.json'); console.log('Contract Address:', artifact.address);\""
+    },
+    "dependencies": {
+        "next": "14.2.5",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "face-api.js": "^0.22.2",
+        "@bitauth/libauth": "^2.0.0",
+        "cashscript": "^0.8.0",
+        "framer-motion": "^11.0.0",
+        "lucide-react": "^0.344.0",
+        "date-fns": "^3.3.1"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@types/react": "^18.2.48",
+        "@types/react-dom": "^18.2.18",
+        "typescript": "^5.3.3",
+        "eslint": "^8.56.0",
+        "eslint-config-next": "14.2.5",
+        "tailwindcss": "^3.4.1",
+        "postcss": "^8.4.35",
+        "autoprefixer": "^10.4.18",
+        "cashc": "^0.8.0"
+    }
+}
